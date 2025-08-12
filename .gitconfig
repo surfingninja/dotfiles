@@ -1,0 +1,55 @@
+[color]
+  status = auto
+  branch = auto
+  ui = auto
+[color "diff"]
+  old = red
+  new = green
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore_global
+[safe]
+	directory = ~/.vim/plugged/YouCompleteMe
+[alias]
+  up = "!git remote update -p; git merge --ff-only @{u}"
+  logp = log --pretty=oneline
+  ci = commit
+  st = status
+  co = checkout
+  cl = clone
+  pu = git push -u origin master
+  hist = log --pretty=format:\"%h %ad | %C(bold blue)[%an]%Creset %s%C(yellow)%d%Creset\" --graph --date=short
+  br = branch
+  type = cat-file -t
+  dump = cat-file -p
+
+  unstage = reset HEAD              # unstage a file
+  uncommit = reset --soft HEAD~1    # go back one commit
+
+  r = remote -v                     # show remotes
+
+  rc = rebase --continue            # continue rebase
+  rs = rebase --skip                # skip rebaseo
+
+  b = branch -v                     # verbose branch info
+
+  ss = stash
+  sl = stash list
+  sa = stash apply                  # apply stash, changes restored
+  sd = stash drop                   # drops stash, changes lost
+  sp = stash pop                    # applies and drops stash
+
+  permission-reset = "!git diff -p | grep -E \"^-E(diff|old mode|new mode)\" | sed -e \"s/^old/NEW/;s/^new/old/;s/^NEW/new/\" | git apply"
+
+[init]
+	templatedir = ~/.git_template
+[push]
+	default = tracking
+[include]
+  path = ~/.gitconfig.user
+[diff]
+	algorithm = patience

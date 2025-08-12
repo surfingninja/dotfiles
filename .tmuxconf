@@ -1,0 +1,119 @@
+# Remember that tmux is heavily aliased
+# bind == bind-key
+# set  == set-option
+# setw == set-window-option
+# etc.
+
+set -g default-shell /usr/bin/zsh
+
+# Faster prefixing
+set -g prefix C-@
+bind C-@ last-window
+unbind C-b
+
+# send prefix to inner session
+bind a send-prefix
+
+# First window should be 1 (easier acces on number row)
+set -g base-index 1
+set -g pane-base-index 1
+
+# A little more history (default is 2000)
+set -g history-limit 5000
+
+# Faster repetition
+set -sg escape-time 1
+
+# A little help to the annoying window resizes
+setw -g aggressive-resize on
+
+# Notifications
+setw -g monitor-activity on
+set -g visual-activity off
+
+# vi is our religion
+setw -g mode-keys vi
+
+# vim stuff for vi mode, copy and pasting
+# bind vi-copy 'v' begin-selection
+# bind vi-copy 'y' copy-selection
+# bind vi-copy 'Y' copy-end-of-line
+unbind ]
+bind p paste-buffer
+# following echo is to copy no newline char
+bind y \
+  run -b "echo -n $(tmux show-buffer) | xclip -sel clip -i" \;\
+  display "Copied tmux buffer to system clipboard"
+
+# vim movements for pane switching
+unbind j
+unbind k
+unbind h
+unbind l
+# these movements had -r before, which causes a slight delay,
+# when going only one step, therefore scratched
+bind j select-pane -D
+bind k select-pane -U
+bind h select-pane -L
+bind l select-pane -R
+
+# new panes and windows - newer tmux version need us to declare
+# the starting directory manually
+bind \ split-window -h -c '#{pane_current_path}'
+bind - split-window -v -c '#{pane_current_path}'
+bind c new-window -c '#{pane_current_path}'
+
+# additional window movements, just like tab movement in vim
+bind -r C-L next-window
+bind -r C-H previous-window
+
+# Status bar and general style
+set -g status-position top
+set -g status-bg default # same as terminal bg
+set -g status-fg white
+#set -g status-interval 60 # leave the default 15
+set -g status-left-length 30
+set -g status-left '#[fg=colour248]#I:#P #[fg=colour45]#H'
+set -g status-justify centre
+set -g status-right-length 90
+set -g status-right '#[fg=yellow]CPU: #[default]#(cut -d " " -f 1 /proc/loadavg) #[fg=yellow]Mem: #[default]#(~/.tmux/memstats.sh)'
+
+set-window-option -g window-status-current-fg colour226
+# The status colors are reversed by default, that's why we
+# switch their style attributes to none
+setw -g window-status-bell-attr none
+setw -g window-status-bell-fg red
+setw -g window-status-bell-bg black
+#setw -g window-status-content-style fg=yellow,bg=black
+setw -g window-status-activity-attr none
+setw -g window-status-activity-fg yellow
+setw -g window-status-activity-bg black
+# Time status line messages get shown
+set -g display-time 1250
+
+# Toggle mouse on and off
+#
+# Take note, these are two multiline strings.
+# We cannot query for the mouse mode itself it seems, that's why
+# we need to ask for another value.
+bind m \
+  if '[ "`tmux show -g -v mouse-select-pane`" = "off" ]'\
+    "set -g mode-mouse on;\
+     set -g mouse-resize-pane on;\
+     set -g mouse-select-pane on;\
+     set -g mouse-select-window on;\
+     display 'Mouse enabled'" \
+    "set -g mode-mouse off;\
+     set -g mouse-resize-pane off;\
+     set -g mouse-select-pane off;\
+     set -g mouse-select-window off;\
+     display 'Mouse disabled'"
+
+# reload the source
+bind r source-file ~/.tmux.conf\; display 'Reloaded tmux configuration'
+
+# kill pane without confirmation prompt
+bind Q kill-pane
+
+# open a little debug pane on the bottom
+bind b split-window -v -p 20 -c '#{pane_current_path}'
