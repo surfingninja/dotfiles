@@ -30,3 +30,4 @@ vim.cmd [[ set noswapfile ]]
 vim.wo.number = true
 vim.opt.relativenumber = true
 
+vim.api.nvim_set_option("clipboard", "unnamedplus")
