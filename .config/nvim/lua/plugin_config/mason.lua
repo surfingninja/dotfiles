@@ -15,7 +15,8 @@ mlsp.setup({
                         "pylsp",
                         "terraformls",
                         "ast_grep",
-                        "solargraph"
+                        "solargraph",
+                        "codebook"
   }
 })
 

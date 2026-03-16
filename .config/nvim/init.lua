@@ -1,3 +1,4 @@
+vim.g.lspconfig_disable_warning = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -14,8 +15,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
-require("core.plugins")
-require("core.options")
-require("core.keymaps")
-require("core.plugin_config")
+require("plugins")
+require("options")
+require("keymaps")
+require("plugin_config")

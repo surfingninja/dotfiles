@@ -8,7 +8,7 @@ function git-on-main {
 function git-cleanup {
   branch=`current_branch`
   git checkout main && git up
-  git-nuke! $current_branch
+  git-nuke! $branch
 }
 
 function git-new-branch {
@@ -17,10 +17,6 @@ function git-new-branch {
 
 function git-checkout-remote-branch {
   git checkout --track origin/$1
-}
-
-function git-nuke {
-  git branch -d $1 && git push origin :$1
 }
 
 function git-nuke! {
