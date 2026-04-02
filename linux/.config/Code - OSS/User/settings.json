@@ -1,10 +1,27 @@
 {
+    "window.menuBarVisibility": "toggle",
+    "editor.scrollbar.vertical": "hidden",
+    "editor.scrollbar.verticalScrollbarSize": 0,
+    "security.workspace.trust.untrustedFiles": "newWindow",
+    "security.workspace.trust.startupPrompt": "never",
+    "security.workspace.trust.enabled": false,
+    "editor.minimap.side": "left",
+    "editor.fontFamily": "'JetbrainsMono Nerd Font','Maple Mono', monospace",
+    "extensions.autoUpdate": false,
+    "workbench.statusBar.visible": false,
+    "terminal.external.linuxExec": "ghostty",
+    "terminal.explorerKind": "both",
+    "terminal.sourceControlRepositoriesKind": "both",
+    "telemetry.telemetryLevel": "off",
+    "workbench.activityBar.location": "top",
+    "window.customTitleBarVisibility": "auto",
+    "workbench.sideBar.location": "right",
+
     "files.autoSave": "afterDelay",
     "http.proxy": "",
     "http.proxyAuthorization": null,
     "http.proxyStrictSSL": true,
-    "typescript.suggest.completeFunctionCalls": true,
-    "javascript.suggest.completeFunctionCalls": true,
+    "js/ts.suggest.completeFunctionCalls": true,
     "[typescript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
@@ -40,5 +57,6 @@
     "workbench.startupEditor": "none",
     "editor.renderWhitespace": "all",
     "editor.wordWrap": "on",
-    "editor.minimap.enabled": false
+    "editor.minimap.enabled": false,
+    "explorer.compactFolders": false
 }

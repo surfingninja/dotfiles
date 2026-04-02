@@ -8,7 +8,11 @@ require("lazy").setup({
     "nvim-lualine/lualine.nvim",
     dependencies = { 'nvim-tree/nvim-web-devicons' }
   },
-  "nvim-treesitter/nvim-treesitter",
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    lazy = false
+  },
   "vim-test/vim-test",
   "lewis6991/gitsigns.nvim",
   "preservim/vimux",
