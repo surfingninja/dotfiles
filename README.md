@@ -4,5 +4,6 @@
 ```bash
 git clone https://github.com/surfingninja/dotfiles ~/dotfiles
 cd dotfiles
-stow .
+chmod +x stow.sh
+./stow.sh
 ```
