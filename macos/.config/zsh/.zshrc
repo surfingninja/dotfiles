@@ -68,6 +68,7 @@ alias myip='dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com'
 alias lip="ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print \$2}'"
 alias zshcon="v .zshrc"
 alias last='find . -type f -not -path "*/\*" -exec ls -lrt {} +'
+alias onn='cd ~/projects/obsidian_notes && git add . && git commit -am "new notes" && git push -u origin master && cd ~/'
 
 # Git
 alias gc="git commit -m"

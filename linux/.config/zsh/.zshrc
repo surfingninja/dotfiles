@@ -1,3 +1,13 @@
+# Add user configurations here
+# For HyDE to not touch your beloved configurations,
+# we added a config file for you to customize HyDE before loading zshrc
+# Edit $ZDOTDIR/.user.zsh to customize HyDE before loading zshrc
+
+#  Plugins 
+# oh-my-zsh plugins are loaded  in $ZDOTDIR/.user.zsh file, see the file for more information
+
+# unset -f command_not_found_handler # Uncomment to prevent searching for commands not found in package manager
+
 setopt prompt_subst
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 autoload bashcompinit && bashcompinit
@@ -9,6 +19,7 @@ export M2_HOME="${HOME}/apache-maven"
 export DOTFILES=$HOME/projects/dotfiles
 export ZSH_CUSTOM=$DOTFILES/zsh
 export ZSH="$HOME/.oh-my-zsh"
+export PYENV_ROOT="$HOME/.pyenv"
 
 export PATH="
 /usr/local/bin:\
@@ -21,9 +32,11 @@ export PATH="
 /usr/local/opt/python/libexec/bin:\
 $HOME/.rbenv/bin:\
 ${M2_HOME}/bin:\
-$HOME/.atuin/bin/env\
+$HOME/.atuin/bin/env:\
+$PYENV_ROOT/bin:\
 $PATH"
 
+export TERMINAL=ghostty
 export EDITOR=nvim
 export LANG=en_US.UTF-8
 
@@ -31,22 +44,38 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-alias cat=bat
-alias cl='clear'
+
+alias c='clear'
+alias cat='bat'
 alias t='tmux'
 alias g='git'
 alias lg='lazygit'
 alias d='docker'
-alias v='/usr/bin/nvim'
+alias v='nvim'
+alias vc='code'
 alias rr='ranger'
-alias sudi='sudo -i'
+alias sudi='sudo -i '
+alias sude='sudo -E '
 alias python="python3.14"
 alias pip="pip3.14"
-alias {lm,дь}='ls -lah'
-alias myip='dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com'
-alias lip="ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print \$2}'"
-alias zshcon="v .zshrc"
+alias pip310="~/.pyenv/versions/3.10.13/bin/pip"
+alias {lm,дь}='eza -lha --icons=auto --sort=name --group-directories-first'
+alias lt='eza --icons=auto --tree'
+alias myip='curl -4 ifconfig.me'
+alias lip="ip -4 -o addr show scope global | awk '{split(\$4,a,\"/\"); print a[1]}'"
+alias zshcon="v ~/.config/zsh/.zshrc"
+alias zshsou="source ~/.config/zsh/.zshrc"
 alias last='find . -type f -not -path "*/\*" -exec ls -lrt {} +'
+alias onn='cd ~/projects/obsidian_notes && git add . && git commit -am "new notes" && git push -u origin master && cd ~/'
+
+# pacman
+alias Syu="sudo pacman -Syu"
+alias S="sudo pacman -S"
+alias Rns="sudo pacman -Rns"
+alias Ss="sudo pacman -Ss"
+alias Qdt="sudo pacman -Qdt"
+alias RQdt="sudo pacman -Rns \$(sudo pacman -Qdtq)"
+alias Sc="yay -Sc"
 
 # Git
 alias gc="git commit -m"
@@ -71,7 +100,6 @@ alias dps="docker ps"
 alias dpa="docker ps -a"
 alias dl="docker ps -l -q"
 alias dx="docker exec -it"
-
 
 # K8S
 export KUBECONFIG=~/.kube/config
@@ -110,7 +138,7 @@ plugins=(
     git
 )
 
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^w' autosuggest-execute
 bindkey '^e' autosuggest-accept
 bindkey '^u' autosuggest-toggle
@@ -118,13 +146,13 @@ bindkey '^L' vi-forward-word
 bindkey '^k' up-line-or-search
 bindkey '^j' down-line-or-search
 
+source $ZSH/plugins/zsh-256color/zsh-256color.plugin.zsh
+source $ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # To know which specific random themre was loaded using $random, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="half-life"
 # more themes to use: af-magic, agnoster, half-life, apple, bira, darkblood, dst, frontcube, jonathan, nanotech
 source $ZSH/oh-my-zsh.sh
-
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 function ranger {
     local IFS=$'\t\n'
@@ -153,10 +181,11 @@ fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 
 eval "$(rbenv init -)"
 eval "$(atuin init zsh)"
+eval "$(pyenv init -)"
 
 if [[ -o interactive ]] && [[ -t 1 ]] && [[ -z "$FASTFETCH_DONE" ]]; then
     export FASTFETCH_DONE=1
-    fastfetch
+    #fastfetch
     #neofetch
 fi
 
@@ -171,3 +200,7 @@ fi
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
 
+
+# required for graphics performance in videogames
+export LD_PRELOAD=""
+unset LD_PRELOAD 
