@@ -9,6 +9,48 @@ local capabilities = vim.tbl_deep_extend(
   require("cmp_nvim_lsp").default_capabilities()
 )
 
+local function safe_cwd()
+  local cwd = vim.loop.cwd()
+  if not cwd or cwd == "" or cwd == "/" then
+    return vim.fn.expand("$HOME")
+  end
+  return cwd
+end
+
+local util = require("lspconfig.util")
+
+local function root_dir(fname)
+  if type(fname) == "number" then
+    fname = vim.api.nvim_buf_get_name(fname)
+  end
+
+  if not fname or fname == "" then
+    return vim.loop.cwd() 
+  end
+  
+  if fname:find("/%.github/workflows/") then
+    return nil
+  end
+  
+  local root = util.root_pattern(
+    ".git",
+    "package.json",
+    "tsconfig.json",
+    "go.mod"
+  )(fname) or util.path.dirname(fname) or safe_cwd()
+
+  if root then
+    return root
+  end
+
+  local dir = vim.fs.dirname(fname)
+  if dir and dir ~= "" then
+    return dir
+  end
+
+  return vim.loop.cwd()
+end
+
 -- Lua
 lspconfig.lua_ls = {
   capabilities = capabilities,
@@ -28,11 +70,17 @@ lspconfig.lua_ls = {
 }
 
 -- Other
-
-vim.lsp.config.solargraph  = { capabilities = capabilities }
-vim.lsp.config.ts_ls  	   = { capabilities = capabilities }
-vim.lsp.config.gopls  	   = { capabilities = capabilities }
-vim.lsp.config.tailwindcss = { capabilities = capabilities }
+vim.lsp.config.solargraph  = { capabilities = capabilities, root_dir = root_dir }
+vim.lsp.config.ts_ls       = { 
+  capabilities = capabilities, 
+  root_dir = root_dir, 
+  filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" } }
+vim.lsp.config.gopls  	   = { capabilities = capabilities, root_dir = root_dir }
+vim.lsp.config.tailwindcss = { 
+  capabilities = capabilities, 
+  root_dir = root_dir, 
+  filetypes = { "html", "css", "javascript", "typescript", "tsx", "jsx" } }
+vim.lsp.config.yamlls = { capabilities = capabilities }
 
 vim.lsp.enable({
   "lua_ls",
@@ -40,6 +88,7 @@ vim.lsp.enable({
   "ts_ls",
   "gopls",
   "tailwindcss",
+  "yamlls"
 })
 
 -- LSP keymaps (unchanged)
