@@ -183,7 +183,7 @@ eval "$(rbenv init -)"
 eval "$(atuin init zsh)"
 eval "$(pyenv init -)"
 
-if [[ -o interactive ]] && [[ -t 1 ]] && [[ -z "$FASTFETCH_DONE" ]]; then
+if [[ -o interactive ]] && [[ -t 1 ]] && [[ -z "$FASTFETCH_DONE" ]] &&  [[ "$TERM_PROGRAM" != "vscode" ]];; then
     export FASTFETCH_DONE=1
     #fastfetch
     #neofetch

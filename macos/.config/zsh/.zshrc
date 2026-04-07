@@ -63,7 +63,8 @@ alias rr='ranger'
 alias sudi='sudo -i'
 alias python="python3.14"
 alias pip="pip3.14"
-alias {lm,дь}='ls -lah'
+alias {lm,дь}='eza -lha --icons=auto --sort=name --group-directories-first'
+alias lt='eza --icons=auto --tree'
 alias myip='dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com'
 alias lip="ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print \$2}'"
 alias zshcon="v .zshrc"
@@ -168,7 +169,7 @@ fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 eval "$(rbenv init -)"
 eval "$(atuin init zsh)"
 
-if [[ -o interactive ]] && [[ -t 1 ]] && [[ -z "$FASTFETCH_DONE" ]]; then
+if [[ -o interactive ]] && [[ -t 1 ]] && [[ -z "$FASTFETCH_DONE" ]] &&  [[ "$TERM_PROGRAM" != "vscode" ]];; then
     export FASTFETCH_DONE=1
     fastfetch
     #neofetch
