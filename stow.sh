@@ -11,10 +11,10 @@ esac
 
 echo "Detected OS: $OS"
 
-stow gen
+stow -t "$HOME" gen
 
 if [[ "$OS" == "linux" ]]; then
-  stow linux
+  stow -t "$HOME" linux
 elif [[ "$OS" == "macos" ]]; then
-  stow macos
+  stow -t "$HOME" macos
 fi
