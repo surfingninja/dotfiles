@@ -12,30 +12,15 @@ export CXX=/opt/homebrew/opt/llvm/bin/clang++
 export CPATH=`xcrun --show-sdk-path`/usr/include
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-export JAVA_HOME=$(/usr/libexec/java_home -v 25.0.1)
+# export JAVA_HOME=$(/usr/libexec/java_home -v 25.0.1)
 export M2_HOME="${HOME}/apache-maven"
 export DOTNET_ROOT="/opt/homebrew/opt/dotnet@6/libexec"
 export DOTFILES=$HOME/projects/dotfiles
 export ZSH_CUSTOM=$DOTFILES/zsh
 export ZSH="$HOME/.oh-my-zsh"
+export PYENV_ROOT="$HOME/.pyenv"
 
-export PATH="/opt/homebrew/bin:\
-/usr/local/bin:\
-/usr/local/sbin:\
-/usr/bin:\
-/bin:\
-/usr/sbin:\
-/sbin:\
-.local/bin:\
-/Applications/Docker.app/Contents/Resources/bin/:\
-/usr/local/opt/python/libexec/bin:\
-${HOME}/Library/Python/3.9/bin:\
-$HOME/.rbenv/bin:\
-${M2_HOME}/bin:\
-/Applications/Visual Studio Code.app/Contents/Resources/app/bin:\
-/opt/homebrew/opt/dotnet@6/bin:\
-$HOME/.atuin/bin/env\
-$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:/usr/local/opt/python/libexec/bin:$HOME/.rbenv/bin:${M2_HOME}/bin:$HOME/.atuin/bin:$PYENV_ROOT/bin:$PATH"
 
 export EDITOR=/opt/homebrew/bin/nvim
 export LANG=en_US.UTF-8

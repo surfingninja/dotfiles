@@ -21,20 +21,7 @@ export ZSH_CUSTOM=$DOTFILES/zsh
 export ZSH="$HOME/.oh-my-zsh"
 export PYENV_ROOT="$HOME/.pyenv"
 
-export PATH="
-/usr/local/bin:\
-/usr/local/sbin:\
-/usr/bin:\
-/bin:\
-/usr/sbin:\
-/sbin:\
-.local/bin:\
-/usr/local/opt/python/libexec/bin:\
-$HOME/.rbenv/bin:\
-${M2_HOME}/bin:\
-$HOME/.atuin/bin/env:\
-$PYENV_ROOT/bin:\
-$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:$HOME/.rbenv/bin:${M2_HOME}/bin:$HOME/.atuin/bin:$PYENV_ROOT/bin:$PATH"
 
 export TERMINAL=ghostty
 export EDITOR=nvim
