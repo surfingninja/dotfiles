@@ -20,8 +20,9 @@ export DOTFILES=$HOME/projects/dotfiles
 export ZSH_CUSTOM=$DOTFILES/zsh
 export ZSH="$HOME/.oh-my-zsh"
 export PYENV_ROOT="$HOME/.pyenv"
+export OPENAI_API_KEY=""
 
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:$HOME/.rbenv/bin:${M2_HOME}/bin:$HOME/.atuin/bin:$PYENV_ROOT/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:/usr/local/opt/python/libexec/bin:$HOME/.rbenv/bin:${M2_HOME}/bin:$HOME/.atuin/bin:$PYENV_ROOT/bin:$PATH"
 
 export TERMINAL=ghostty
 export EDITOR=nvim
@@ -34,6 +35,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 alias c='clear'
 alias cat='bat'
+alias cl='clear'
 alias t='tmux'
 alias g='git'
 alias lg='lazygit'
@@ -42,7 +44,7 @@ alias v='nvim'
 alias vc='code'
 alias rr='ranger'
 alias sudi='sudo -i '
-alias sude='sudo -E '
+alias sude='sudo -E env HOME=$HOME USER=$USER XDG_CONFIG_HOME=$XDG_CONFIG_HOME XDG_CACHE_HOME=$XDG_CACHE_HOME  XDG_STATE_HOME=$XDG_STATE_HOME '
 alias python="python3.14"
 alias pip="pip3.14"
 alias pip310="~/.pyenv/versions/3.10.13/bin/pip"
@@ -123,9 +125,12 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 
 plugins=(
     git
+    ansible
+    zsh-autosuggestions  
+    zsh-syntax-highlighting
 )
 
-source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 bindkey '^w' autosuggest-execute
 bindkey '^e' autosuggest-accept
 bindkey '^u' autosuggest-toggle
@@ -133,8 +138,8 @@ bindkey '^L' vi-forward-word
 bindkey '^k' up-line-or-search
 bindkey '^j' down-line-or-search
 
-source $ZSH/plugins/zsh-256color/zsh-256color.plugin.zsh
-source $ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.oh-my-zsh/plugins/zsh-256color/zsh-256color.plugin.zsh
+source $HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 # To know which specific random themre was loaded using $random, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="half-life"
@@ -170,7 +175,7 @@ eval "$(rbenv init -)"
 eval "$(atuin init zsh)"
 eval "$(pyenv init -)"
 
-if [[ -o interactive ]] && [[ -t 1 ]] && [[ -z "$FASTFETCH_DONE" ]] &&  [[ "$TERM_PROGRAM" != "vscode" ]];; then
+if [[ -o interactive ]] && [[ -t 1 ]] && [[ -z "$FASTFETCH_DONE" ]]; then
     export FASTFETCH_DONE=1
     #fastfetch
     #neofetch
@@ -188,6 +193,10 @@ fi
 # export ARCHFLAGS="-arch $(uname -m)"
 
 
-# required for graphics performance in videogames
 export LD_PRELOAD=""
 unset LD_PRELOAD 
+
+bindkey -v
+
+bindkey "^[b" backward-word
+bindkey "^[f" forward-word

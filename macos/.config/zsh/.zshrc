@@ -115,7 +115,8 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 plugins=(
-  git 
+  git
+  ansible 
   macos
   zsh-autosuggestions  
   zsh-syntax-highlighting
@@ -154,7 +155,7 @@ fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 eval "$(rbenv init -)"
 eval "$(atuin init zsh)"
 
-if [[ -o interactive ]] && [[ -t 1 ]] && [[ -z "$FASTFETCH_DONE" ]] &&  [[ "$TERM_PROGRAM" != "vscode" ]];; then
+if [[ -o interactive ]] && [[ -t 1 ]] && [[ -z "$FASTFETCH_DONE" ]] &&  [[ "$TERM_PROGRAM" != "vscode" ]]; then
     export FASTFETCH_DONE=1
     fastfetch
     #neofetch
