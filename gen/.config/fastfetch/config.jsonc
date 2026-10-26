@@ -176,6 +176,13 @@
         },
         {
             "type": "command",
+            "keyIcon": "",
+            "key": "║{#red}│ {icon}  Java      │{$4}│{#keys}║{$2}",
+            "text": "java -version 2>&1 | head -n 1 | awk -F '\"' '{print $2}'",
+            "format": "java {}"
+        },
+        {
+            "type": "command",
             "keyIcon": "",
             "key": "║{#red}│ {icon}  NodeJS    │{$4}│{#keys}║{$2}",
             "text": "node --version",
@@ -261,8 +268,8 @@
             "key": "╚═════════════════{$5}╝", // Bottom border of the entire layout
             "format": ""
         },
-        // End with color palette and line break
-        "break", // Add a blank line
-        "colors" // Display color palette
+        
+        "break" // Add a blank line
+        // "colors" // Display color palette
     ]
 }
