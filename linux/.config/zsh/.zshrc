@@ -14,7 +14,7 @@ autoload bashcompinit && bashcompinit
 autoload -Uz compinit
 compinit
 
-#export JAVA_HOME=$(/usr/libexec/java_home -v 25.0.1)
+export JAVA_HOME="/usr/lib/jvm/jdk-27"
 export M2_HOME="${HOME}/apache-maven"
 export DOTFILES=$HOME/projects/dotfiles
 export ZSH_CUSTOM=$DOTFILES/zsh
@@ -22,7 +22,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export PYENV_ROOT="$HOME/.pyenv"
 export OPENAI_API_KEY=""
 
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:/usr/local/opt/python/libexec/bin:$HOME/.rbenv/bin:${M2_HOME}/bin:$HOME/.atuin/bin:$PYENV_ROOT/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.local/bin:$JAVA_HOME/bin:/usr/local/opt/python/libexec/bin:$HOME/.rbenv/bin:${M2_HOME}/bin:$HOME/.atuin/bin:$PYENV_ROOT/bin:$PATH"
 
 export TERMINAL=ghostty
 export EDITOR=nvim
@@ -178,7 +178,6 @@ eval "$(pyenv init -)"
 if [[ -o interactive ]] && [[ -t 1 ]] && [[ -z "$FASTFETCH_DONE" ]]; then
     export FASTFETCH_DONE=1
     #fastfetch
-    #neofetch
 fi
 
 

@@ -12,7 +12,7 @@ export CXX=/opt/homebrew/opt/llvm/bin/clang++
 export CPATH=`xcrun --show-sdk-path`/usr/include
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-# export JAVA_HOME=$(/usr/libexec/java_home -v 25.0.1)
+export JAVA_HOME=$(/usr/libexec/java_home -v 25.0.1)
 export M2_HOME="${HOME}/apache-maven"
 export DOTNET_ROOT="/opt/homebrew/opt/dotnet@6/libexec"
 export DOTFILES=$HOME/projects/dotfiles
@@ -46,6 +46,7 @@ alias d='/opt/homebrew/bin/docker'
 alias v='/opt/homebrew/bin/nvim'
 alias rr='ranger'
 alias sudi='sudo -i'
+alias sude='sudo -E env HOME=$HOME USER=$USER XDG_CONFIG_HOME=$XDG_CONFIG_HOME XDG_CACHE_HOME=$XDG_CACHE_HOME  XDG_STATE_HOME=$XDG_STATE_HOME '
 alias python="python3.14"
 alias pip="pip3.14"
 alias {lm,дь}='eza -lha --icons=auto --sort=name --group-directories-first'
@@ -158,5 +159,4 @@ eval "$(atuin init zsh)"
 if [[ -o interactive ]] && [[ -t 1 ]] && [[ -z "$FASTFETCH_DONE" ]] &&  [[ "$TERM_PROGRAM" != "vscode" ]]; then
     export FASTFETCH_DONE=1
     fastfetch
-    #neofetch
 fi
